@@ -1,0 +1,21 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sales-performance-api", "sales-performance-api\sales-performance-api.csproj", "{4A92D7F4-4F33-49A5-98B4-8D16350B56EF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{87B29B7D-90B3-4EBB-90F7-46EF77EE9C26}"
+	ProjectSection(SolutionItems) = preProject
+		compose.yaml = compose.yaml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A92D7F4-4F33-49A5-98B4-8D16350B56EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A92D7F4-4F33-49A5-98B4-8D16350B56EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A92D7F4-4F33-49A5-98B4-8D16350B56EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A92D7F4-4F33-49A5-98B4-8D16350B56EF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

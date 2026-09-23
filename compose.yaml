@@ -1,0 +1,7 @@
+﻿services:
+  sales-performance-api:
+    image: sales-performance-api
+    build:
+      context: .
+      dockerfile: sales-performance-api/Dockerfile
+

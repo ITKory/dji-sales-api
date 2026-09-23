@@ -1,0 +1,24 @@
+# Build output
+bin/
+obj/
+
+# IDE files
+.idea/
+.vs/
+*.user
+*.suo
+
+# NuGet
+project.assets.json
+project.nuget.cache
+project.packagespec.json
+rider.project.restore.info
+*.dgspec.json
+*.nuget.g.props
+*.nuget.g.targets
+
+# Assembly info generated files
+*.AssemblyInfo.cs
+*.AssemblyInfoInputs.cache
+*.assets.cache
+*.AssemblyReference.cache

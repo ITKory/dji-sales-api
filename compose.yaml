@@ -1,7 +1,59 @@
-﻿services:
-  sales-performance-api:
-    image: sales-performance-api
-    build:
-      context: .
-      dockerfile: sales-performance-api/Dockerfile
+﻿x-app: &app
+  image: sales-performance-api:local
+  build:
+    context: .
+    dockerfile: sales-performance-api/Dockerfile
 
+x-database-environment: &database-environment
+  ConnectionStrings__SalesDatabase: "Host=postgres;Port=5432;Database=${POSTGRES_DB:-sales_performance};Username=${POSTGRES_USER:-sales_performance};Password=${POSTGRES_PASSWORD:-sales_demo_local_only}"
+
+services:
+  postgres:
+    image: postgres:16.15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-sales_performance}
+      POSTGRES_USER: ${POSTGRES_USER:-sales_performance}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-sales_demo_local_only}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+      start_period: 5s
+
+  database-init:
+    <<: *app
+    command: ["--initialize-database"]
+    environment:
+      <<: *database-environment
+      Seed__Enabled: ${SEED_ENABLED:-true}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: "no"
+
+  sales-performance-api:
+    <<: *app
+    environment:
+      <<: *database-environment
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: "8080"
+      Http__UseHttpsRedirection: "false"
+    ports:
+      - "127.0.0.1:${API_PORT:-5026}:8080"
+    depends_on:
+      database-init:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "--silent", "http://localhost:8080/health/ready"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 5s
+
+volumes:
+  pgdata:

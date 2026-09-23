@@ -22,3 +22,8 @@ rider.project.restore.info
 *.AssemblyInfoInputs.cache
 *.assets.cache
 *.AssemblyReference.cache
+
+# Local environment
+.env
+.env.*
+!.env.example

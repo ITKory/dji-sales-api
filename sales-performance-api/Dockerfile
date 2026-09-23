@@ -1,23 +1,16 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER $APP_UID
-WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
-
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["sales-performance-api/sales-performance-api.csproj", "sales-performance-api/"]
 RUN dotnet restore "sales-performance-api/sales-performance-api.csproj"
-COPY . .
-WORKDIR "/src/sales-performance-api"
-RUN dotnet build "./sales-performance-api.csproj" -c $BUILD_CONFIGURATION -o /app/build
+COPY sales-performance-api/ sales-performance-api/
+RUN dotnet publish "sales-performance-api/sales-performance-api.csproj" -c Release -o /app/publish --no-restore /p:UseAppHost=false
 
-FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./sales-performance-api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
-
-FROM base AS final
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+USER root
+RUN apt-get update && apt-get install -y --no-install-recommends curl && rm -rf /var/lib/apt/lists/*
+USER $APP_UID
 WORKDIR /app
-COPY --from=publish /app/publish .
+ENV ASPNETCORE_HTTP_PORTS=8080
+EXPOSE 8080
+COPY --from=build /app/publish .
 ENTRYPOINT ["dotnet", "sales-performance-api.dll"]

@@ -55,5 +55,22 @@ services:
       retries: 20
       start_period: 5s
 
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: sales-performance-frontend:local
+    ports:
+      - "127.0.0.1:${FRONTEND_PORT:-5173}:80"
+    depends_on:
+      sales-performance-api:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--spider", "http://127.0.0.1/"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
+
 volumes:
   pgdata:

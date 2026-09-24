@@ -27,3 +27,12 @@ rider.project.restore.info
 .env
 .env.*
 !.env.example
+
+# Frontend build output and dependencies
+node_modules/
+dist/
+dist-ssr/
+*.tsbuildinfo
+
+# macOS
+.DS_Store

@@ -1,0 +1,146 @@
+Grok 20:21
+На основе ТЗ составь детальный набор промптов для Bolt. Промпты должны быть четкие не более 10-13
+
+Bolt
+1) Modern B2B SaaS sales analytics dashboard.
+   Desktop only (target 1440×900).
+   Clean, professional, high information density, excellent readability.
+   Use shadcn/ui + Tailwind CSS.
+   Prefer subtle borders, soft shadows, muted backgrounds.
+   Primary accent: indigo / blue.
+   Support light and dark mode.
+   All numbers should be formatted nicely (currency, percentages, compact).
+
+Create a full desktop dashboard layout for a Sales Performance Dashboard.
+
+  Requirements:
+  - Top header with logo/title "Sales Performance" and a period selector on the right.
+  - Period selector must support:
+    - Today
+    - Last 7 days
+    - Last 30 days
+    - This month
+    - Last month
+    - Custom date range (from → to) with a calendar popover
+  - Clean, modern SaaS style using shadcn/ui + Tailwind.
+  - Target viewport 1440×900.
+  - Soft background, subtle borders, good spacing.
+  - The main content area should be ready to accept multiple sections (KPI cards, ranking, charts, tables).
+
+  Make the period selector the primary control of the page.
+
+  2)Create a row of 6 modern KPI cards for a sales analytics dashboard.
+
+    Cards:
+    1. Revenue
+    2. Gross Profit
+    3. Margin %
+    4. Number of Sales
+    5. Average Check
+    6. Best Manager (name + value)
+
+    Each card must show:
+    - Title
+    - Large main value
+    - Small comparison to previous period (↑ / ↓ with percentage and absolute difference)
+    - Subtle sparkline or trend indicator (optional but welcome)
+
+    Style:
+    - shadcn/ui cards
+    - Clean typography
+    - Good visual hierarchy
+    - Hover effect
+    - Skeleton loading state version of the same cards
+
+    Use indigo/blue accent. Make numbers easy to scan.
+3)Create a Managers Ranking section for a sales dashboard.
+
+  Requirements:
+  - Toggle between two ranking modes: "Gross Profit" and "Average Check"
+  - Table or card list showing for each manager:
+    - Rank position
+    - Manager name + avatar/initials
+    - Number of sales
+    - Revenue
+    - Gross Profit
+    - Average Check
+    - Margin %
+    - Change vs previous period (↑↓ with color)
+  - Highlight top-3 positions
+  - Smooth re-ordering animation when switching sort mode
+  - Empty state when no data
+  - Loading skeleton
+
+  Use shadcn/ui Table or a clean card list. Make it look premium and scannable.
+
+  4)Create a time-series chart section for sales dynamics.
+    Features:
+    - Toggle between metrics: Revenue / Gross Profit / Number of Sales
+    - Line or area chart (Recharts or Tremor style)
+    - X-axis: dates
+    - Tooltip with formatted values
+    - Smooth transitions when changing metric or period
+    - Loading skeleton
+    - Empty state
+
+    Style should match modern SaaS dashboards (clean grid, subtle colors, good typography).
+
+5)Create two side-by-side sections:
+
+  1. Sales / Profit by Categories
+     - Horizontal bar chart or donut + legend
+     - Show Revenue and Gross Profit share
+
+  2. Top Products
+     - Ranked list or small table
+     - Product name, category, revenue, gross profit, margin
+
+  Both sections should have:
+  - Loading skeleton
+  - Empty state
+  - Clean modern look with shadcn/ui
+
+  6)Create a "Recent Sales" table section.
+
+    Columns:
+    - Date
+    - Manager (name + avatar)
+    - Customer (name + company)
+    - Products (summary or count)
+    - Status (Paid / Cancelled / Refunded) — with colored badges
+    - Amount (Revenue)
+    - Gross Profit
+
+    Features:
+    - Pagination or "Load more"
+    - Status badges with proper colors
+    - Hover row effect
+    - Loading skeleton
+    - Empty state ("No sales in selected period")
+
+    Use shadcn/ui Table. Make it dense but readable.
+
+    7)Compose a complete Sales Performance Dashboard page using all the previous sections.
+
+      Layout order (top → bottom):
+      1. Header + Period Selector
+      2. KPI Cards row (6 cards)
+      3. Two-column section:
+         - Left: Managers Ranking
+         - Right: Dynamics Chart
+      4. Two-column section:
+         - Categories
+         - Top Products
+      5. Full-width Recent Sales table
+
+      Global requirements:
+      - All data is controlled by the selected period
+      - Proper loading / error / empty states for every block
+      - Subtle micro-animations (counters, chart transitions, ranking reorder)
+      - Desktop only, 1440×900 target
+      - shadcn/ui + Tailwind
+      - Professional B2B SaaS aesthetic
+
+      Добавил от себя
+      1) Create beautiful skeleton loading states and empty states for all dashboard sections (KPI cards, ranking, chart, categories, recent sales).
+      2) Create a Manager Comparison view: select 2–3 managers and show side-by-side metrics + small charts.

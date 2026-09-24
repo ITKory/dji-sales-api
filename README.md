@@ -50,4 +50,3 @@ docker compose logs -f
 ```sh
 docker compose down
 ```
-]()
